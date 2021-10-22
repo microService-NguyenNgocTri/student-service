@@ -4,6 +4,7 @@ import com.example.sinhvienservice.VO.Khoa;
 import com.example.sinhvienservice.VO.ResponseTemplateVO;
 import com.example.sinhvienservice.entity.SinhVien;
 import com.example.sinhvienservice.repository.SinhVienRepository;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +22,8 @@ public class SinhVienServiceImpl implements SinhVienService{
         return sinhVienRepository.save(sinhVien);
     }
 
+
+    @RateLimiter(name = "basic")
     @Override
     public ResponseTemplateVO getSinhVienWithKhoa(Long sinhVienId) {
         ResponseTemplateVO vo = new ResponseTemplateVO();
