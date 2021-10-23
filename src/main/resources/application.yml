@@ -3,7 +3,12 @@ server:
 resilience4j:
   ratelimiter:
     instances:
-      basic:
+      multipleRateLimiters_rps_limiter:
         limitForPeriod: 1
+        limitRefreshPeriod: 4s
+        timeoutDuration: 1s
+
+      multipleRateLimiters_rpm_limiter:
+        limitForPeriod: 40
         limitRefreshPeriod: 1m
-        timeoutDuration: 1m
+        timeoutDuration: 2s
